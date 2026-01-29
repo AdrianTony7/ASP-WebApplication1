@@ -1,0 +1,118 @@
+@page
+@model WebApplication1.Pages.CreateItemModel
+@{
+    ViewData["Title"] = "Add New Item";
+}
+
+<div class="max-w-4xl mx-auto">
+    <div class="flex items-center gap-4 mb-8">
+        <a asp-page="/Items" class="btn btn-ghost btn-circle">
+            <i class="bi bi-arrow-left text-xl"></i>
+        </a>
+        <h1 class="text-3xl font-black tracking-tight">Create New Item</h1>
+    </div>
+
+    <div class="card bg-base-100 shadow-2xl border border-base-300">
+        <div class="card-body p-8 lg:p-12">
+            <form method="post" class="space-y-6">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <!-- Name Input -->
+                    <div class="form-control">
+                        <label class="label">
+                            <span class="label-text font-bold">Full Name</span>
+                        </label>
+                        <input type="text" asp-for="Input.Name" placeholder="Enter name..." 
+                               class="input validator w-full" required minlength="3" maxlength="100" />
+                        <div class="validator-hint">Name must be between 3 and 100 characters</div>
+                        <span asp-validation-for="Input.Name" class="text-error text-xs mt-1"></span>
+                    </div>
+
+                    <!-- Email Input -->
+                    <div class="form-control">
+                        <label class="label">
+                            <span class="label-text font-bold">Email Address</span>
+                        </label>
+                        <input type="email" asp-for="Input.Email" placeholder="email@example.com" 
+                               class="input validator w-full" required />
+                        <div class="validator-hint">Please enter a valid email address</div>
+                        <span asp-validation-for="Input.Email" class="text-error text-xs mt-1"></span>
+                    </div>
+
+                    <!-- Job Select -->
+                    <div class="form-control">
+                        <label class="label">
+                            <span class="label-text font-bold">Job Title</span>
+                        </label>
+                        <select asp-for="Input.Job" class="select validator w-full" required>
+                            <option disabled selected value="">Select a job...</option>
+                            @foreach (var job in Model.Jobs)
+                            {
+                                <option value="@job">@job</option>
+                            }
+                        </select>
+                        <div class="validator-hint">Please select a job title</div>
+                        <span asp-validation-for="Input.Job" class="text-error text-xs mt-1"></span>
+                    </div>
+
+                    <!-- Age Input -->
+                    <div class="form-control">
+                        <label class="label">
+                            <span class="label-text font-bold">Age</span>
+                        </label>
+                        <input type="number" asp-for="Input.Age" placeholder="Min 18" 
+                               class="input validator w-full" min="18" max="100" required />
+                        <div class="validator-hint">Age must be between 18 and 100</div>
+                        <span asp-validation-for="Input.Age" class="text-error text-xs mt-1"></span>
+                    </div>
+                </div>
+
+                <!-- Favorite Color Radio -->
+                <div class="form-control">
+                    <label class="label">
+                        <span class="label-text font-bold">Favorite Color</span>
+                    </label>
+                    <div class="flex flex-wrap gap-4">
+                        @foreach (var color in Model.Colors)
+                        {
+                            <label class="label cursor-pointer flex gap-2 items-center bg-base-200/50 px-4 py-2 rounded-xl hover:bg-base-200 transition-colors">
+                                <input type="radio" asp-for="Input.FavoriteColor" value="@color" class="radio radio-primary" />
+                                <span class="label-text">@color</span>
+                            </label>
+                        }
+                    </div>
+                    <span asp-validation-for="Input.FavoriteColor" class="text-error text-xs mt-1"></span>
+                </div>
+
+                <!-- Account Status Checkbox -->
+                <div class="form-control w-fit">
+                    <label class="label cursor-pointer flex gap-4">
+                        <input type="checkbox" asp-for="Input.IsActive" class="checkbox checkbox-primary" />
+                        <span class="label-text font-bold">Active Account</span>
+                    </label>
+                </div>
+
+                <!-- Notes Textarea -->
+                <div class="form-control">
+                    <label class="label">
+                        <span class="label-text font-bold">Additional Notes</span>
+                    </label>
+                    <textarea asp-for="Input.Notes" class="textarea textarea-bordered h-24" placeholder="Any extra details..."></textarea>
+                    <span asp-validation-for="Input.Notes" class="text-error text-xs mt-1"></span>
+                </div>
+
+                <div class="divider"></div>
+
+                <div class="card-actions justify-end gap-4 mt-4">
+                    <a asp-page="/Items" class="btn btn-ghost border-base-300">Cancel</a>
+                    <button type="submit" class="btn btn-primary px-8">
+                        <i class="bi bi-save mr-2"></i> Create Item
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

@@ -1,0 +1,176 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Home page";
+}
+
+<div id="dashboard">
+    <!-- Welcome Header -->
+    <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+        <div>
+            <h2 class="text-3xl font-extrabold tracking-tight">Overview Dashboard</h2>
+            <p class="text-base-content/60">Welcome back, Administrator. Here's what's happening today.</p>
+        </div>
+        <div class="flex gap-2">
+            <button class="btn btn-primary btn-sm md:btn-md shadow-lg shadow-primary/20">Export PDF</button>
+            <button class="btn btn-ghost btn-outline btn-sm md:btn-md border-base-300">Update Feed</button>
+        </div>
+    </div>
+
+    <!-- Stats Section -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div class="stats shadow glass-card">
+            <div class="stat">
+                <div class="stat-figure text-primary">
+                    <i class="bi bi-currency-dollar text-3xl"></i>
+                </div>
+                <div class="stat-title">Monthly Revenue</div>
+                <div class="stat-value text-primary">$45,200</div>
+                <div class="stat-desc">Jan 1st - Jan 22nd</div>
+            </div>
+        </div>
+
+        <div class="stats shadow glass-card border-l-4 border-secondary">
+            <div class="stat">
+                <div class="stat-figure text-secondary">
+                    <i class="bi bi-people text-3xl"></i>
+                </div>
+                <div class="stat-title">New Users</div>
+                <div class="stat-value text-secondary">4,200</div>
+                <div class="stat-desc">↗︎ 400 (22%)</div>
+            </div>
+        </div>
+
+        <div class="stats shadow glass-card">
+            <div class="stat">
+                <div class="stat-figure text-accent">
+                    <i class="bi bi-box-seam text-3xl"></i>
+                </div>
+                <div class="stat-title">Active Orders</div>
+                <div class="stat-value text-accent">1,200</div>
+                <div class="stat-desc">↘︎ 90 (14%)</div>
+            </div>
+        </div>
+
+        <div class="stats shadow glass-card">
+            <div class="stat">
+                <div class="stat-figure text-warning">
+                    <div class="radial-progress text-warning" style="--value:70; --size:3rem; --thickness: 4px;" role="progressbar">70%</div>
+                </div>
+                <div class="stat-title">Goal Progress</div>
+                <div class="stat-value">86%</div>
+                <div class="stat-desc text-warning">Target: 100k</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Content Area -->
+    <div class="grid grid-cols-1 xl:grid-cols-3 gap-8 py-4">
+        <!-- Table Section -->
+        <div class="xl:col-span-2 glass-card rounded-3xl p-6 overflow-x-auto">
+            <div class="flex items-center justify-between mb-6">
+                <h3 class="text-xl font-bold">Recent Transactions</h3>
+                <button class="btn btn-ghost btn-sm underline decoration-primary">View All</button>
+            </div>
+            <table class="table table-zebra bg-transparent">
+                <thead>
+                    <tr class="border-base-content/10">
+                        <th>Transaction</th>
+                        <th>Category</th>
+                        <th>Status</th>
+                        <th>Amount</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>
+                            <div class="flex items-center gap-3">
+                                <div class="avatar placeholder">
+                                    <div class="bg-neutral text-neutral-content rounded-full w-8">
+                                        <span>AM</span>
+                                    </div>
+                                </div>
+                                <div class="font-bold">Apple Music Subscription</div>
+                            </div>
+                        </td>
+                        <td>Entertainment</td>
+                        <td><span class="badge badge-success badge-sm">Success</span></td>
+                        <td class="font-mono">$9.99</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="flex items-center gap-3">
+                                <div class="avatar placeholder">
+                                    <div class="bg-neutral text-neutral-content rounded-full w-8">
+                                        <span>AZ</span>
+                                    </div>
+                                </div>
+                                <div class="font-bold">Amazon Web Services</div>
+                            </div>
+                        </td>
+                        <td>Cloud Computing</td>
+                        <td><span class="badge badge-warning badge-sm">Pending</span></td>
+                        <td class="font-mono">$1,245.50</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="flex items-center gap-3">
+                                <div class="avatar placeholder">
+                                    <div class="bg-neutral text-neutral-content rounded-full w-8">
+                                        <span>ST</span>
+                                    </div>
+                                </div>
+                                <div class="font-bold">Stripe Payout</div>
+                            </div>
+                        </td>
+                        <td>Service</td>
+                        <td><span class="badge badge-success badge-sm">Success</span></td>
+                        <td class="font-mono">$4,300.20</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Activity / Sidebar Content -->
+        <div class="xl:col-span-1 space-y-6">
+            <!-- Card -->
+            <div class="card bg-secondary text-secondary-content shadow-xl">
+                <div class="card-body">
+                    <h2 class="card-title text-2xl">Upgrade to PRO</h2>
+                    <p>Get access to advanced analytics and unlimited projects today!</p>
+                    <div class="card-actions justify-end mt-4">
+                        <button class="btn btn-neutral border-none">Learn More</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Simple List -->
+            <div class="glass-card rounded-3xl p-6">
+                <h3 class="text-lg font-bold mb-4">Latest Activities</h3>
+                <ul class="space-y-4">
+                    <li class="flex gap-4">
+                        <div class="w-2 h-2 rounded-full bg-primary mt-2"></div>
+                        <div>
+                            <p class="text-sm font-semibold">New user registered</p>
+                            <p class="text-xs opacity-50">2 minutes ago</p>
+                        </div>
+                    </li>
+                    <li class="flex gap-4">
+                        <div class="w-2 h-2 rounded-full bg-secondary mt-2"></div>
+                        <div>
+                            <p class="text-sm font-semibold">Server rebooted</p>
+                            <p class="text-xs opacity-50">45 minutes ago</p>
+                        </div>
+                    </li>
+                    <li class="flex gap-4">
+                        <div class="w-2 h-2 rounded-full bg-accent mt-2"></div>
+                        <div>
+                            <p class="text-sm font-semibold">Database backup completed</p>
+                            <p class="text-xs opacity-50">1 hour ago</p>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>

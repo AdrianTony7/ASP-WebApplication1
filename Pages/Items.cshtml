@@ -1,0 +1,128 @@
+@page
+@model WebApplication1.Pages.ItemsModel
+@{
+    ViewData["Title"] = "Items List";
+}
+
+<div class="card bg-base-100 shadow-xl border border-base-300">
+    <div class="card-body">
+        <div class="flex justify-between items-center mb-4">
+            <h2 class="card-title text-2xl font-bold">Items Management</h2>
+            <a asp-page="/CreateItem" class="btn btn-primary btn-sm rounded-lg hover:scale-105 transition-transform">
+                <i class="bi bi-plus-lg mr-2"></i> Create New Item
+            </a>
+        </div>
+
+        <!-- Filter & Search Area -->
+        <form method="get" class="flex flex-wrap gap-4 mb-6 items-end">
+            <div class="form-control w-full max-w-xs">
+                <label class="label">
+                    <span class="label-text font-semibold">Search Name</span>
+                </label>
+                <div class="join">
+                    <input type="text" asp-for="SearchTerm" placeholder="e.g. Cy Ganderton" class="input input-bordered join-item w-full" />
+                    <button type="submit" class="btn btn-primary join-item">
+                        <i class="bi bi-search"></i>
+                    </button>
+                </div>
+            </div>
+
+            <div class="form-control w-full max-w-xs">
+                <label class="label">
+                    <span class="label-text font-semibold">Filter by Job</span>
+                </label>
+                <select asp-for="FilterJob" class="select select-bordered w-full" onchange="this.form.submit()">
+                    <option value="">All Jobs</option>
+                    @foreach (var job in Model.Jobs)
+                    {
+                        <option value="@job">@job</option>
+                    }
+                </select>
+            </div>
+
+            <div class="flex-1"></div>
+
+            <div class="form-control">
+                <a asp-page="/Items" class="btn btn-ghost">Clear Filters</a>
+            </div>
+        </form>
+
+        <!-- Table Area -->
+        <div class="overflow-x-auto rounded-lg border border-base-200">
+            <table class="table table-zebra w-full">
+                <!-- head -->
+                <thead class="bg-base-200/50">
+                    <tr>
+                        <th class="w-16">ID</th>
+                        <th>Name</th>
+                        <th>Job</th>
+                        <th>Favorite Color</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (Model.Items.Any())
+                    {
+                        @foreach (var item in Model.Items)
+                        {
+                            <tr class="hover">
+                                <th>@item.Id</th>
+                                <td class="font-medium">@item.Name</td>
+                                <td>
+                                    <span class="badge badge-ghost">@item.Job</span>
+                                </td>
+                                <td>
+                                    <div class="flex items-center gap-2">
+                                        <div class="size-3 rounded-full" style="background-color: @item.FavoriteColor.ToLower(); border: 1px solid rgba(0,0,0,0.1);"></div>
+                                        @item.FavoriteColor
+                                    </div>
+                                </td>
+                            </tr>
+                        }
+                    }
+                    else
+                    {
+                        <tr>
+                            <td colspan="4" class="text-center py-10 opacity-50 italic">No items found matching your criteria.</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Pagination Area -->
+        <div class="flex justify-between items-center mt-6">
+            <div class="text-sm opacity-60">
+                Page @Model.PageIndex of @Model.TotalPages
+            </div>
+            
+            <div class="join shadow-sm">
+                <a asp-page="/Items" 
+                   asp-route-PageIndex="@(Model.PageIndex - 1)" 
+                   asp-route-SearchTerm="@Model.SearchTerm" 
+                   asp-route-FilterJob="@Model.FilterJob"
+                   class="join-item btn btn-sm @(Model.PageIndex <= 1 ? "btn-disabled" : "")">
+                    «
+                </a>
+                
+                @for (int i = 1; i <= Model.TotalPages; i++)
+                {
+                    <a asp-page="/Items" 
+                       asp-route-PageIndex="@i" 
+                       asp-route-SearchTerm="@Model.SearchTerm" 
+                       asp-route-FilterJob="@Model.FilterJob"
+                       class="join-item btn btn-sm @(Model.PageIndex == i ? "btn-active" : "")">
+                        @i
+                    </a>
+                }
+
+                <a asp-page="/Items" 
+                   asp-route-PageIndex="@(Model.PageIndex + 1)" 
+                   asp-route-SearchTerm="@Model.SearchTerm" 
+                   asp-route-FilterJob="@Model.FilterJob"
+                   class="join-item btn btn-sm @(Model.PageIndex >= Model.TotalPages ? "btn-disabled" : "")">
+                    »
+                </a>
+            </div>
+        </div>
+    </div>
+</div>

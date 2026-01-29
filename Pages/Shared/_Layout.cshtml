@@ -1,0 +1,201 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - WebApplication1</title>
+    <script type="importmap"></script>
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@@5" rel="stylesheet" type="text/css" />
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@5/themes.css" rel="stylesheet" type="text/css" />
+    <script src="https://cdn.jsdelivr.net/npm/@@tailwindcss/browser@@4"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/WebApplication1.styles.css" asp-append-version="true" />
+</head>
+
+<body class="bg-base-100 h-screen overflow-hidden">
+    <style>
+        /* Modern Glassmorphism & Custom Accents */
+        /* .glass-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .gradient-text {
+            background: linear-gradient(90deg, #6366f1, #a855f7, #ec4899);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        } */
+    </style>
+
+    <div class="drawer lg:drawer-open h-screen">
+        <input id="my-drawer-4" type="checkbox" class="drawer-toggle" />
+
+        <div class="drawer-content flex flex-col bg-base-100 h-full overflow-hidden">
+            <!-- Navbar -->
+            <nav class="navbar w-full bg-base-200/50 backdrop-blur-md sticky top-0 z-10 border-b border-base-300">
+                <div class="flex-none lg:hidden">
+                    <label for="my-drawer-4" aria-label="open sidebar" class="btn btn-square btn-ghost">
+                        <i class="bi bi-list text-2xl"></i>
+                    </label>
+                </div>
+                <div class="flex-1 px-4 lg:px-8">
+                    <h1 class="text-xl font-bold gradient-text">Executive Insights</h1>
+                </div>
+                <div class="flex gap-4 px-4 items-center">
+                    <label class="toggle text-base-content scale-120">
+                        <input type="checkbox" value="dark" class="theme-controller" />
+                        <svg aria-label="sun" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><g stroke-linejoin="round" stroke-linecap="round" stroke-width="2" fill="none" stroke="currentColor"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2"></path><path d="M12 20v2"></path><path d="m4.93 4.93 1.41 1.41"></path><path d="m17.66 17.66 1.41 1.41"></path><path d="M2 12h2"></path><path d="M20 12h2"></path><path d="m6.34 17.66-1.41 1.41"></path><path d="m19.07 4.93-1.41 1.41"></path></g></svg>
+                        <svg aria-label="moon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><g stroke-linejoin="round" stroke-linecap="round" stroke-width="2" fill="none" stroke="currentColor"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"></path></g></svg>
+                    </label>
+                    <div class="form-control hidden md:block">
+                        <input type="text" placeholder="Search..." class="input input-sm input-bordered w-24 md:w-auto rounded-md" />
+                    </div>
+                    <div class="dropdown dropdown-end">
+                        <div tabindex="0" role="button" class="btn btn-ghost btn-circle avatar border border-primary/20">
+                            <div class="w-10 rounded-full">
+                                <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Felix" alt="User Avatar" />
+                            </div>
+                        </div>
+                        <ul tabindex="0" class="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-200 rounded-box w-52">
+                            <li><a>Profile</a></li>
+                            <li><a>Settings</a></li>
+                            <li><a class="text-error">Logout</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+            <main role="main" class="flex-1 p-6 lg:p-10 space-y-8 animate-in fade-in duration-700 overflow-y-auto">
+                @RenderBody()
+            </main>
+        </div>
+
+        <div class="drawer-side is-drawer-close:overflow-visible">
+            <label for="my-drawer-4" aria-label="close sidebar" class="drawer-overlay"></label>
+            <div class="flex h-full overflow-y-auto flex-col items-start bg-base-200/80 backdrop-blur-lg border-r border-base-300 is-drawer-close:w-16 is-drawer-open:w-72">
+                <!-- Sidebar Brand -->
+                <div class="p-6 w-full flex items-center gap-3 border-b border-base-300">
+                    <div class="size-10 rounded-xl bg-primary flex items-center justify-center text-primary-content shadow-lg shadow-primary/30">
+                        <i class="bi bi-stack text-2xl"></i>
+                    </div>
+                    <span class="text-2xl font-black tracking-tighter is-drawer-close:hidden">AIMS</span>
+                </div>
+
+                <!-- User Info for Desktop Open Drawer -->
+                <div class="p-4 w-full is-drawer-close:hidden">
+                    <div class="flex items-center gap-4 p-3 bg-base-300/30 rounded-2xl border border-base-content/5">
+                        <div class="avatar online">
+                            <div class="w-10 rounded-full">
+                                <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Felix" />
+                            </div>
+                        </div>
+                        <div class="flex-grow overflow-hidden">
+                            <p class="font-bold truncate">Felix Manager</p>
+                            <p class="text-xs opacity-50 truncate">felix@nddc.gov.ng</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Navigation Content -->
+                <ul class="menu w-full p-0 space-y-1">
+                    @{
+                        var currentPage = ViewContext.RouteData.Values["page"]?.ToString() ?? "";
+                    }
+                    <li>
+                        <a asp-page="/Index" class="@(currentPage.Equals("/Index", StringComparison.OrdinalIgnoreCase) ? "menu-active" : "") p-4 rounded-none transition-all duration-200 hover:bg-base-300/30" title="Dashboard">
+                            <i class="bi bi-grid-1x2-fill text-xl"></i>
+                            <span class="is-drawer-close:hidden font-medium ml-3">Dashboard</span>
+                        </a>
+                    </li>
+
+                    <li>
+                        <a asp-page="/Items" class="@(currentPage.Equals("/Items", StringComparison.OrdinalIgnoreCase) ? "menu-active" : "") p-4 rounded-none transition-all duration-200 hover:bg-base-300/30" title="Items">
+                            <i class="bi bi-list-task text-xl"></i>
+                            <span class="is-drawer-close:hidden font-medium ml-3">Items</span>
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="#" class="p-4 rounded-none transition-all duration-200 hover:bg-base-300/30" title="Analytics">
+                            <i class="bi bi-graph-up-arrow text-xl"></i>
+                            <span class="is-drawer-close:hidden font-medium ml-3">Analytics</span>
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="#" class="p-4 rounded-none transition-all duration-200 hover:bg-base-300/30" title="Customers">
+                            <i class="bi bi-people-fill text-xl"></i>
+                            <span class="is-drawer-close:hidden font-medium ml-3">Customers</span>
+                        </a>
+                    </li>
+
+                    <li>
+                        <a asp-page="/CreateItem" class="@(currentPage.Equals("/CreateItem", StringComparison.OrdinalIgnoreCase) ? "menu-active" : "") p-4 rounded-none transition-all duration-200 hover:bg-base-300/30" title="Add Item">
+                            <i class="bi bi-plus-circle text-xl"></i>
+                            <span class="is-drawer-close:hidden font-medium ml-3">Add Item</span>
+                        </a>
+                    </li>
+
+                    <div class="divider border-base-content/10 is-drawer-close:hidden">Support</div>
+
+                    <li>
+                        <a class="p-3 rounded-xl transition-all hover:bg-base-300/50" title="Settings">
+                            <i class="bi bi-question-circle text-xl"></i>
+                            <span class="is-drawer-close:hidden font-medium ml-2">Help Center</span>
+                        </a>
+                    </li>
+
+                    <li>
+                        <a class="p-3 rounded-xl transition-all hover:bg-base-300/50" title="Settings">
+                            <i class="bi bi-gear-fill text-xl"></i>
+                            <span class="is-drawer-close:hidden font-medium ml-2">Settings</span>
+                        </a>
+                    </li>
+                </ul>
+
+                <!-- Sticky Footer / Logout -->
+                <div class="mt-auto w-full p-4 border-t border-base-300 is-drawer-close:hidden">
+                    <button class="btn btn-outline btn-error btn-block rounded-xl border-dashed">
+                        <i class="bi bi-box-arrow-right mr-2"></i>
+                        Logout
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Container -->
+    @if (TempData["SuccessMessage"] != null || TempData["ErrorMessage"] != null)
+    {
+        <div class="toast toast-top toast-center z-[100]">
+            @if (TempData["SuccessMessage"] != null)
+            {
+                <div class="alert alert-success shadow-lg animate-bounce">
+                    <i class="bi bi-check-circle-fill"></i>
+                    <span>@TempData["SuccessMessage"]</span>
+                </div>
+            }
+            @if (TempData["ErrorMessage"] != null)
+            {
+                <div class="alert alert-error shadow-lg">
+                    <i class="bi bi-exclamation-triangle-fill"></i>
+                    <span>@TempData["ErrorMessage"]</span>
+                </div>
+            }
+        </div>
+        <script>
+            setTimeout(() => {
+                const toasts = document.querySelectorAll('.toast');
+                toasts.forEach(t => t.style.display = 'none');
+            }, 5000);
+        </script>
+    }
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>
